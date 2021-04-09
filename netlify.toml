@@ -7,9 +7,10 @@
 # Use the current plugin in builds for testing and debugging.
 # Local path to the plugin.
 package = "."
-  # Plugin configuration
-  #  [plugins.inputs]
-  #  foo = "bar"
+[[plugins]]
+    package = "netlify-plugin-astra"
+    [plugins.inputs]
+
 
 [build]
 # Dummy build command

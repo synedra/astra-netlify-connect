@@ -1,27 +1,49 @@
+
+const astraCollections = require('@astrajs/collections');
+const astraRest = require('@astrajs/rest');
+const chalk = require('chalk');
+const os = require('os');
+const fs = require('fs');
+const readline = require('readline');
+const axios = require('axios');
+const dotenv = require("parsenv");
+const insideNetlify = insideNetlifyBuildContext();
+const jq = require('node-jq');
 // This is the main file for the Netlify Build plugin astra.
 // Please read the comments to learn more about the Netlify Build plugin syntax.
 // Find more information in the Netlify documentation.
-
+async function getTokens() {
+  let data = {};
+  if (!process.env['ASTRA_DB_APPLICATION_TOKEN']) {         
+    let rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: false
+    });
+    console.log('Login to Astra at https://dstx.io/workshops')
+    console.log('After login, you can create a database.')
+    console.log('    database: netlify')
+    console.log('    keyspace: classes')
+    console.log('Click on the database name (netlify) to view details.')
+    console.log('Click on the Settings tab at the top of the screen')
+    
+    process.env['ASTRA_DB_ADMIN_TOKEN']= await question("Create an application token for Database Administrator\n    (save to CSV if desired)\n    and paste the 'Token' value here:\n")
+    process.env['ASTRA_DB_ADMIN_TOKEN'] = process.env['ASTRA_DB_ADMIN_TOKEN'].replace(/"/g,"");
+    dotenv.edit({ ASTRA_DB_ADMIN_TOKEN: process.env['ASTRA_DB_ADMIN_TOKEN']});
+    process.env['ASTRA_DB_APPLICATION_TOKEN'] = await question("Create an application token for API Admin User \n    (save to CSV if desired)\n    and paste the 'Token' value here:\n")
+    process.env['ASTRA_DB_APPLICATION_TOKEN'] = process.env['ASTRA_DB_APPLICATION_TOKEN'].replace(/"/g,"");
+    dotenv.edit({ ASTRA_DB_APPLICATION_TOKEN: process.env['ASTRA_DB_APPLICATION_TOKEN']});
+    dotenv.write(config)
+    dotenv.config(config)
+    return dotenv;
+  }
+  return dotenv;
+}
 /* eslint-disable no-unused-vars */
 module.exports = {
-  // The plugin main logic uses `on...` event handlers that are triggered on
-  // each new Netlify Build.
-  // Anything can be done inside those event handlers.
-  // Information about the current build are passed as arguments. The build
-  // configuration file and some core utilities are also available.
   async onPreBuild({
-    // Whole configuration file. For example, content of `netlify.toml`
     netlifyConfig,
-    // Users can pass configuration inputs to any plugin in their Netlify
-    // configuration file.
-    // For example:
-    //
-    //   [[plugins]]
-    //   package = "netlify-plugin-astra"
-    //     [plugins.inputs]
-    //     foo = "bar"
     inputs,
-    // `onError` event handlers receive the error instance as argument
     error,
 
     // Build constants
@@ -46,6 +68,12 @@ module.exports = {
       NETLIFY_BUILD_VERSION,
       // The Netlify Site ID
       SITE_ID,
+      ASTRA_DB_ADMIN_TOKEN,
+      ASTRA_DB_APPLICATION_TOKEN,
+      ASTRA_DB_ID,
+      ASTRA_DB_REGION,
+      ASTRA_DB_KEYSPACES,
+      ASTRA_DB_NAME
     },
 
     // Core utilities
