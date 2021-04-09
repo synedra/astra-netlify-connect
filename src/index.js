@@ -23,7 +23,7 @@ console.log(dotenv.config)
 // This is the main file for the Netlify Build plugin astra.
 // Please read the comments to learn more about the Netlify Build plugin syntax.
 // Find more information in the Netlify documentation.
-async function getTokens() {
+async function getTokens(constants) {
   let data = {};
   console.log(process.env)
   console.log(constants)
@@ -115,7 +115,7 @@ module.exports = {
   }) {
     try {
       // Commands are printed in Netlify logs
-      let tokens = await getTokens()
+      let tokens = await getTokens(constants)
       console.log(tokens)
     } catch (error) {
       // Report a user error
