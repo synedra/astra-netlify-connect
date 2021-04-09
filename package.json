@@ -51,6 +51,9 @@
   },
   "dependencies": {
     "@astrajs/collections": "^0.0.13",
-    "@astrajs/rest": "^0.0.13"
+    "@astrajs/rest": "^0.0.13",
+    "dotenv": "^8.2.0",
+    "node-jq": "^1.12.0",
+    "parsenv": "^1.0.2"
   }
 }

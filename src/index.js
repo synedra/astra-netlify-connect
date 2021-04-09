@@ -7,7 +7,6 @@ const fs = require('fs');
 const readline = require('readline');
 const axios = require('axios');
 const dotenv = require("parsenv");
-const insideNetlify = insideNetlifyBuildContext();
 const jq = require('node-jq');
 // This is the main file for the Netlify Build plugin astra.
 // Please read the comments to learn more about the Netlify Build plugin syntax.
