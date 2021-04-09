@@ -1,6 +1,6 @@
 {
   "name": "netlify-plugin-astra",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Netlify Build plugin - This plugin connects your netlify instance to an Astra database backend, including a managed Cassandra database and HTTP APIs through Stargate.",
   "main": "src/index.js",
   "files": [
@@ -44,7 +44,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "execa": "^5.0.0",
-    "netlify-cli": "^3.14.0",
+    "netlify-cli": "^3.17.0",
     "netlify-plugin-astra": "^0.0.1",
     "prettier": "^2.1.2",
     "release-it": "^14.0.3"

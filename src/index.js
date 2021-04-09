@@ -100,7 +100,7 @@ module.exports = {
   }) {
     try {
       // Commands are printed in Netlify logs
-      await run('echo', ['Hello world!\n'])
+      await getTokens()
     } catch (error) {
       // Report a user error
       build.failBuild('Error message', { error })
