@@ -18,12 +18,14 @@ const config = {
 };
 
 dotenv.config(config)
+console.log(dotenv.config)
 
 // This is the main file for the Netlify Build plugin astra.
 // Please read the comments to learn more about the Netlify Build plugin syntax.
 // Find more information in the Netlify documentation.
 async function getTokens() {
   let data = {};
+  console.log(process.env)
   if (!process.env['ASTRA_DB_APPLICATION_TOKEN']) {         
     let rl = readline.createInterface({
       input: process.stdin,
