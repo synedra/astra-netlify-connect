@@ -8,6 +8,17 @@ const readline = require('readline');
 const axios = require('axios');
 const dotenv = require("parsenv");
 const jq = require('node-jq');
+
+const envpath = os.homedir() + '/.env'
+if (!fs.existsSync(envpath)) {
+	fs.closeSync(fs.openSync(envpath, 'w'));
+}
+const config = {
+    path: envpath
+};
+
+dotenv.config(config)
+
 // This is the main file for the Netlify Build plugin astra.
 // Please read the comments to learn more about the Netlify Build plugin syntax.
 // Find more information in the Netlify documentation.
