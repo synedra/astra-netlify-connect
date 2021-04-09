@@ -26,10 +26,10 @@ async function getTokens() {
     console.log('Click on the database name (netlify) to view details.')
     console.log('Click on the Settings tab at the top of the screen')
     
-    process.env['ASTRA_DB_ADMIN_TOKEN']= await question("Create an application token for Database Administrator\n    (save to CSV if desired)\n    and paste the 'Token' value here:\n")
+    process.env['ASTRA_DB_ADMIN_TOKEN']= await rl.question("Create an application token for Database Administrator\n    (save to CSV if desired)\n    and paste the 'Token' value here:\n")
     process.env['ASTRA_DB_ADMIN_TOKEN'] = process.env['ASTRA_DB_ADMIN_TOKEN'].replace(/"/g,"");
     dotenv.edit({ ASTRA_DB_ADMIN_TOKEN: process.env['ASTRA_DB_ADMIN_TOKEN']});
-    process.env['ASTRA_DB_APPLICATION_TOKEN'] = await question("Create an application token for API Admin User \n    (save to CSV if desired)\n    and paste the 'Token' value here:\n")
+    process.env['ASTRA_DB_APPLICATION_TOKEN'] = await rl.question("Create an application token for API Admin User \n    (save to CSV if desired)\n    and paste the 'Token' value here:\n")
     process.env['ASTRA_DB_APPLICATION_TOKEN'] = process.env['ASTRA_DB_APPLICATION_TOKEN'].replace(/"/g,"");
     dotenv.edit({ ASTRA_DB_APPLICATION_TOKEN: process.env['ASTRA_DB_APPLICATION_TOKEN']});
     dotenv.write(config)
@@ -99,7 +99,8 @@ module.exports = {
   }) {
     try {
       // Commands are printed in Netlify logs
-      await getTokens()
+      let tokens = await getTokens()
+      console.log(tokens)
     } catch (error) {
       // Report a user error
       build.failBuild('Error message', { error })
