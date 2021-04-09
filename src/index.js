@@ -26,6 +26,7 @@ console.log(dotenv.config)
 async function getTokens() {
   let data = {};
   console.log(process.env)
+  console.log(constants)
   if (!process.env['ASTRA_DB_APPLICATION_TOKEN']) {         
     let rl = readline.createInterface({
       input: process.stdin,
@@ -48,6 +49,8 @@ async function getTokens() {
     dotenv.write(config)
     dotenv.config(config)
     return dotenv;
+  } else {
+    console.log(process.env['ASTRA_DB_APPLICATION_TOKEN'])
   }
   return dotenv;
 }
