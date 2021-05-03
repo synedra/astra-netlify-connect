@@ -2,7 +2,7 @@ Netlify Build plugin astra - This plugin connects your netlify instance to an As
 
 # Install
 
-Please install this plugin from the Netlify app.
+Please install this plugin with 'npm install netlify-plugin-astra'
 
 # Configuration
 
